@@ -14,7 +14,7 @@
                         @webkit-transition-end="onTransitionEnd(index)"
                         @transitionend="onTransitionEnd(index)">
                         <div class="day" v-for="(day, dayIndex) in getDaies(item.date)">
-                            <div @click.stop="dayClickHandle(day.date)" :class="{today: day.isToday, sameDay: day.isDay && !day.isToday}">{{day.week}}<br><strong>{{day.date.split('-')[2]}}</strong></div>
+                            <div @click.stop="dayClickHandle(day.date)" :class="{today: day.isToday, sameDay: day.isDay && !day.isToday}">{{day.isToday ? '今' day.week}}<br><strong v-if="day.isToday">{{day.date.split('-')[2]}}</strong></div>
                         </div>
                     </div>
                 </template>
@@ -253,7 +253,7 @@ export default {
                 div{
                     height: 36px; width: 48px; padding: 6px 0; margin: auto; text-align: center; line-height: 18px; font-size: 12px;
                     &.today{
-                        border-radius: 50%; background-color: #dd3629; color: #FFF;
+                        border-radius: 50%; background-color: rgb(255, 204, 51); color: #FFF;
                     }
                     &.sameDay{
                         border-radius: 50%; background-color: #999; color: #FFF;
