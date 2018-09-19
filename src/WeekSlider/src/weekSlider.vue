@@ -14,7 +14,7 @@
                         @webkit-transition-end="onTransitionEnd(index)"
                         @transitionend="onTransitionEnd(index)">
                         <div class="day" v-for="(day, dayIndex) in getDaies(item.date)">
-                            <div @click.stop="dayClickHandle(day.date)" :class="{today: day.isToday, sameDay: day.isDay && !day.isToday}">{{day.isToday ? '今' day.week}}<br><strong v-if="day.isToday">{{day.date.split('-')[2]}}</strong></div>
+                            <div @click.stop="dayClickHandle(day.date)" :class="{today: day.isToday, sameDay: day.isDay && !day.isToday}">{{day.isToday ? '今' : day.week}}<br><strong v-if="!day.isToday">{{day.date.split('-')[2]}}</strong></div>
                         </div>
                     </div>
                 </template>
@@ -106,7 +106,7 @@ export default {
                     date: _theDate.format('YYYY-MM-DD'),
                     week: weeks[i],
                     isToday: _theDate.format('YYYY-MM-DD') === today.format('YYYY-MM-DD'),
-                    isDay: _theDate.format('E') === defaultDay.format('E')
+                    isDay: _theDate.format('YYYY-MM-DD') === defaultDay.format('YYYY-MM-DD')
                 })
             }
             return arr
@@ -251,15 +251,16 @@ export default {
             .day{
                 flex: 1;
                 div{
-                    height: 36px; width: 48px; padding: 6px 0; margin: auto; text-align: center; line-height: 18px; font-size: 12px;
+                    /*position:relative; height: 36px; width: 48px; padding: 6px 0; margin: auto; text-align: center; line-height: 18px; font-size: 12px;*/
+                    position:relative; margin: auto; text-align: center; line-height: 12px; font-size: 12px; top: 50%; transform: translateY(-50%);
                     &.today{
-                        border-radius: 50%; background-color: rgb(255, 204, 51); color: #FFF;
+                        position:absolute; border-radius: 50%; background-color: rgb(255, 204, 51); color: #FFF; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 10px;
                     }
                     &.sameDay{
-                        border-radius: 50%; background-color: #999; color: #FFF;
+                      border-radius: 50%; background-color: #999; color: #FFF; padding: 5px 0;
                     }
                     strong{
-                        font-size: 14px;
+                        font-size: 14px; display: inline-block; padding-top: 8px;
                     }
                 }
             }
