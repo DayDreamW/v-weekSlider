@@ -94,7 +94,7 @@ export default {
             let vm = this,
                 arr = []
             let weekOfDate = Number(moment(date).format('E'))
-            let weeks = ['日', '一', '二', '三', '四', '五', '六']
+            let weeks = ['日', '一一', '二', '三', '四', '五', '六']
             let today = moment()
             let defaultDay = moment(vm.defaultDate)
             if (weekOfDate === 7) {
